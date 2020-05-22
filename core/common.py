@@ -2,7 +2,7 @@
 # coding=utf-8
 
 import tensorflow as tf
-# import tensorflow_addons as tfa
+import tensorflow_addons as tfa
 class BatchNormalization(tf.keras.layers.BatchNormalization):
     """
     "Frozen state" and "inference mode" are two separate concepts.
@@ -35,12 +35,12 @@ def convolutional(input_layer, filters_shape, downsample=False, activate=True, b
         if activate_type == "leaky":
             conv = tf.nn.leaky_relu(conv, alpha=0.1)
         elif activate_type == "mish":
-            conv = mish(conv)
+            # conv = mish(conv)
             # conv = softplus(conv)
             # conv = conv * tf.math.tanh(tf.math.softplus(conv))
             # conv = conv * tf.tanh(softplus(conv))
             # conv = tf.nn.leaky_relu(conv, alpha=0.1)
-            # conv = tfa.activations.mish(conv)
+            conv = tfa.activations.mish(conv)
             # conv = conv * tf.nn.tanh(tf.keras.activations.relu(tf.nn.softplus(conv), max_value=20))
             # conv = tf.nn.softplus(conv)
             # conv = tf.keras.activations.relu(tf.nn.softplus(conv), max_value=20)
